@@ -1,0 +1,69 @@
+{
+    "batchcomplete": true,
+    "query": {
+        "normalized": [
+            {
+                "fromencoded": false,
+                "from": "Jack_Brierley",
+                "to": "Jack Brierley"
+            }
+        ],
+        "pages": [
+            {
+                "pageid": 61363912,
+                "ns": 0,
+                "title": "Jack Brierley",
+                "revisions": [
+                    {
+                        "user": "WereSpielChequers",
+                        "timestamp": "2022-06-01T19:44:08Z"
+                    },
+                    {
+                        "user": "Mickh~enwiki",
+                        "timestamp": "2022-04-13T12:36:42Z"
+                    },
+                    {
+                        "user": "GoodDay",
+                        "timestamp": "2021-10-03T03:23:12Z"
+                    },
+                    {
+                        "user": "ImageRemovalBot",
+                        "timestamp": "2020-10-08T23:56:06Z"
+                    },
+                    {
+                        "user": "Waacstats",
+                        "timestamp": "2020-08-22T13:19:07Z"
+                    },
+                    {
+                        "user": "Vox3000",
+                        "timestamp": "2020-05-22T00:54:22Z"
+                    },
+                    {
+                        "user": "Hugh 3476",
+                        "timestamp": "2019-07-29T18:42:05Z"
+                    },
+                    {
+                        "user": "Magic links bot",
+                        "timestamp": "2019-07-26T16:07:39Z"
+                    },
+                    {
+                        "user": "Sully198787",
+                        "timestamp": "2019-07-26T08:36:15Z"
+                    },
+                    {
+                        "user": "Vox3000",
+                        "timestamp": "2019-07-26T01:16:54Z"
+                    },
+                    {
+                        "user": "Vox3000",
+                        "timestamp": "2019-07-26T01:13:24Z"
+                    },
+                    {
+                        "user": "Vox3000",
+                        "timestamp": "2019-07-26T01:12:56Z"
+                    }
+                ]
+            }
+        ]
+    }
+}
