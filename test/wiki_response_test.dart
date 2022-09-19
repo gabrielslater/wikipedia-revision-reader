@@ -158,7 +158,7 @@ void main() async {
   });
 
   test('WikiResponse properly unpacks JSON data', () {
-    expect(c_elegans_response.title, "Caenorhabditis elegans");
+    expect(c_elegans_response.title, 'Caenorhabditis elegans');
     expect(c_elegans_response.revisions.length, 30);
   });
 }
