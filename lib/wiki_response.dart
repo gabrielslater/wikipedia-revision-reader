@@ -1,5 +1,4 @@
 class WikiResponse {
-  // final String content;
   final String title;
   final List<String> revisions;
 
