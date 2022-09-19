@@ -161,6 +161,12 @@ void main() async {
     expect(c_elegans_response.title, 'Caenorhabditis elegans');
     expect(c_elegans_response.revisions.length, 30);
   });
+  test('WikiResponse stores any redirect', () {
+    expect(c_elegans_response.redirect, {
+      'from': 'C. Elegans',
+      'to': 'Caenorhabditis elegans',
+    });
+  });
 }
 
 /// Reads a JSON file from test files.
