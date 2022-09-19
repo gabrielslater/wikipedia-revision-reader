@@ -14,5 +14,7 @@ class WikiResponse {
         revisions = (json['query']['pages'][0]['revisions'] as List)
             .map((e) => e.toString())
             .toList(),
-        redirect = (json['query']['redirects'][0]);
+        redirect = (json['query']['redirects'] != null)
+            ? json['query']['redirects'][0]
+            : {};
 }
