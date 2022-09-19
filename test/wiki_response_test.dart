@@ -1,11 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
+import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
 void main() async {
   final c_elegans_json = await readJson('c._elegans');
-  final c_elegans_response = WikiResponse.fromJson(c_elegans_json);
+  final c_elegans_response = WikiResponse.fromJson(jsonDecode(c_elegans_json));
 
   test('WikiResponse created', () {
     expect(c_elegans_response.runtimeType, WikiResponse);
