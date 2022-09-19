@@ -6,38 +6,56 @@ import 'package:test/test.dart';
 import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
 void main() async {
-  final c_elegans_json = await readJson('c._elegans');
-  final pet_door_json = await readJson('pet_door');
-  final jack_brierley_json = await readJson('jack_brierley');
-  final c_elegans_response = WikiResponse.fromJson(jsonDecode(c_elegans_json));
-  final pet_door_response = WikiResponse.fromJson(jsonDecode(pet_door_json));
-  final jack_brierley_response =
-      WikiResponse.fromJson(jsonDecode(jack_brierley_json));
+  final queries = ['c._elegans', 'pet_door', 'jack_brierley'];
+  var responses = {};
+
+  for (String query in queries) {
+    var json = jsonDecode(await readJson(query));
+    responses[query] = WikiResponse.fromJson(json);
+  }
 
   test('WikiResponse created', () {
-    expect(c_elegans_response.runtimeType, WikiResponse);
-    expect(pet_door_response.runtimeType, WikiResponse);
-    expect(jack_brierley_response.runtimeType, WikiResponse);
+    for (String response in responses.keys) {
+      expect(responses[response].runtimeType, WikiResponse);
+    }
   });
 
   test('WikiResponse properly unpacks JSON data', () {
-    expect(c_elegans_response.title, 'Caenorhabditis elegans');
-    expect(c_elegans_response.revisions.length, 30);
+    var expected_titles = [
+      'Caenorhabditis elegans',
+      'Pet door',
+      'Jack Brierley'
+    ];
+    var expected_revisions = [30, 30, 12];
 
-    expect(pet_door_response.title, 'Pet door');
-    expect(pet_door_response.revisions.length, 30);
+    var response_index = 0;
 
-    expect(jack_brierley_response.title, 'Jack Brierley');
-    expect(jack_brierley_response.revisions.length, 12);
+    for (String response in responses.keys) {
+      expect(responses[response].title, expected_titles[response_index]);
+      expect(responses[response].revisions.length,
+          expected_revisions[response_index]);
+
+      response_index++;
+    }
   });
 
   test('WikiResponse stores any redirect', () {
-    expect(c_elegans_response.redirect, {
-      'from': 'C. Elegans',
-      'to': 'Caenorhabditis elegans',
-    });
-    expect(pet_door_response.redirect, {});
-    expect(jack_brierley_response.redirect, {});
+    var expected_redirects = [
+      {
+        'from': 'C. Elegans',
+        'to': 'Caenorhabditis elegans',
+      },
+      {},
+      {}
+    ];
+
+    var response_index = 0;
+
+    for (String response in responses.keys) {
+      expect(responses[response].redirect, expected_redirects[response_index]);
+
+      response_index++;
+    }
   });
 }
 
