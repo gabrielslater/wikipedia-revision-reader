@@ -7,7 +7,9 @@ import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
 void main() async {
   final c_elegans_json = await readJson('c._elegans');
+  final pet_door_json = await readJson('pet_door');
   final c_elegans_response = WikiResponse.fromJson(jsonDecode(c_elegans_json));
+  final pet_door_response = WikiResponse.fromJson(jsonDecode(pet_door_json));
 
   test('WikiResponse created', () {
     expect(c_elegans_response.runtimeType, WikiResponse);
@@ -166,6 +168,7 @@ void main() async {
       'from': 'C. Elegans',
       'to': 'Caenorhabditis elegans',
     });
+    expect(pet_door_response.redirect, {});
   });
 }
 
