@@ -12,7 +12,7 @@ class WikiResponse {
         // https://stackoverflow.com/questions/60105956/how-to-cast-dynamic-to-liststring#60106251
         // Map each item in the "revisions" to a string for now.
         revisions = (json['query']['pages'][0]['revisions'] as List)
-            .map((e) => e.toString())
+            .map((item) => item.toString())
             .toList(),
         // If there is no redirect, return an empty map, otherwise return the
         // redirect map.
