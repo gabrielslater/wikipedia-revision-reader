@@ -21,14 +21,14 @@ void main() async {
       }
     });
 
-    test('WikiResponse properly unpacks JSON data', () {
-      var expectedTitles = [
-        'Caenorhabditis elegans',
-        'Pet door',
-        'Jack Brierley'
-      ];
-      var expectedRevisions = [30, 30, 12];
+    var expectedTitles = [
+      'Caenorhabditis elegans',
+      'Pet door',
+      'Jack Brierley'
+    ];
+    var expectedRevisions = [30, 30, 12];
 
+    test('WikiResponse properly unpacks JSON data', () {
       responseIndex = 0;
 
       for (String response in responses.keys) {
@@ -40,16 +40,16 @@ void main() async {
       }
     });
 
-    test('WikiResponse stores any redirect', () {
-      var expectedRedirects = [
-        {
-          'from': 'C. Elegans',
-          'to': 'Caenorhabditis elegans',
-        },
-        {},
-        {}
-      ];
+    var expectedRedirects = [
+      {
+        'from': 'C. Elegans',
+        'to': 'Caenorhabditis elegans',
+      },
+      {},
+      {}
+    ];
 
+    test('WikiResponse stores any redirect', () {
       responseIndex = 0;
 
       for (String response in responses.keys) {
