@@ -15,7 +15,7 @@ class WikiResponse {
     // should parseRevisions() be part of a response? probably not.
     final RevisionParser revisionParser = RevisionParser();
 
-    var revisions = revisionParser.parseRevisions(json);
+    var revisions = revisionParser.parse(json);
     return WikiResponse(
         json['query']['pages'][0]['title'],
         revisions,
