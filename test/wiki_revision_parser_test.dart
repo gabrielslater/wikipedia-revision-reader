@@ -15,7 +15,7 @@ void main() async {
     revisions[query] = RevisionParser.parseRevisions(json);
   }
 
-  group('revision_parser', () {
+  group('RevisionParser', () {
     test('RevisionParser created successfully', () {
       expect(revisionParser.runtimeType, RevisionParser);
     });
