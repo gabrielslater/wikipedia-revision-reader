@@ -9,6 +9,7 @@ void main() async {
   var revisions = {};
 
   final revisionParser = RevisionParser();
+  int revisionIndex;
 
   for (String query in queries) {
     var json = jsonDecode(await readJson(query));
@@ -24,6 +25,16 @@ void main() async {
   test('parseRevisions returns a list of strings', () {
     for (var revision in revisions.keys) {
       expect(revisions[revision].runtimeType, List<String>);
+    }
+  });
+
+  test('parseRevisions returns a list with the correct number of revisions',
+      () {
+    var expectedRevisions = [30, 30, 12];
+    revisionIndex = 0;
+
+    for (var revision in revisions.keys) {
+      expect(revisions[revision].length, expectedRevisions[revisionIndex]);
     }
   });
 }
