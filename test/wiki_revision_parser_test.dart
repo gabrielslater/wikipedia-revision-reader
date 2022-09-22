@@ -34,6 +34,7 @@ void main() async {
 
       for (var revision in revisions.keys) {
         expect(revisions[revision].length, expectedRevisions[revisionIndex]);
+        revisionIndex++;
       }
     });
   });
