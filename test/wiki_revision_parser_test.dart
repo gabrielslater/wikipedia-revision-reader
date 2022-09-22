@@ -20,21 +20,21 @@ void main() async {
     test('RevisionParser created successfully', () {
       expect(revisionParser.runtimeType, RevisionParser);
     });
-  });
 
-  test('parseRevisions returns a list of strings', () {
-    for (var revision in revisions.keys) {
-      expect(revisions[revision].runtimeType, List<String>);
-    }
-  });
+    test('parseRevisions returns a list of strings', () {
+      for (var revision in revisions.keys) {
+        expect(revisions[revision].runtimeType, List<String>);
+      }
+    });
 
-  test('parseRevisions returns a list with the correct number of revisions',
-      () {
-    var expectedRevisions = [30, 30, 12];
-    revisionIndex = 0;
+    test('parseRevisions returns a list with the correct number of revisions',
+        () {
+      var expectedRevisions = [30, 30, 12];
+      revisionIndex = 0;
 
-    for (var revision in revisions.keys) {
-      expect(revisions[revision].length, expectedRevisions[revisionIndex]);
-    }
+      for (var revision in revisions.keys) {
+        expect(revisions[revision].length, expectedRevisions[revisionIndex]);
+      }
+    });
   });
 }
