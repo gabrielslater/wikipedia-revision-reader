@@ -13,47 +13,49 @@ void main() async {
     responses[query] = WikiResponse.fromJson(json);
   }
 
-  test('WikiResponse created', () {
-    for (String response in responses.keys) {
-      expect(responses[response].runtimeType, WikiResponse);
-    }
-  });
+  group('WikiResponse', () {
+    test('WikiResponse created', () {
+      for (String response in responses.keys) {
+        expect(responses[response].runtimeType, WikiResponse);
+      }
+    });
 
-  test('WikiResponse properly unpacks JSON data', () {
-    var expectedTitles = [
-      'Caenorhabditis elegans',
-      'Pet door',
-      'Jack Brierley'
-    ];
-    var expectedRevisions = [30, 30, 12];
+    test('WikiResponse properly unpacks JSON data', () {
+      var expectedTitles = [
+        'Caenorhabditis elegans',
+        'Pet door',
+        'Jack Brierley'
+      ];
+      var expectedRevisions = [30, 30, 12];
 
-    var responseIndex = 0;
+      var responseIndex = 0;
 
-    for (String response in responses.keys) {
-      expect(responses[response].title, expectedTitles[responseIndex]);
-      expect(responses[response].revisions.length,
-          expectedRevisions[responseIndex]);
+      for (String response in responses.keys) {
+        expect(responses[response].title, expectedTitles[responseIndex]);
+        expect(responses[response].revisions.length,
+            expectedRevisions[responseIndex]);
 
-      responseIndex++;
-    }
-  });
+        responseIndex++;
+      }
+    });
 
-  test('WikiResponse stores any redirect', () {
-    var expectedRedirects = [
-      {
-        'from': 'C. Elegans',
-        'to': 'Caenorhabditis elegans',
-      },
-      {},
-      {}
-    ];
+    test('WikiResponse stores any redirect', () {
+      var expectedRedirects = [
+        {
+          'from': 'C. Elegans',
+          'to': 'Caenorhabditis elegans',
+        },
+        {},
+        {}
+      ];
 
-    var responseIndex = 0;
+      var responseIndex = 0;
 
-    for (String response in responses.keys) {
-      expect(responses[response].redirect, expectedRedirects[responseIndex]);
+      for (String response in responses.keys) {
+        expect(responses[response].redirect, expectedRedirects[responseIndex]);
 
-      responseIndex++;
-    }
+        responseIndex++;
+      }
+    });
   });
 }
