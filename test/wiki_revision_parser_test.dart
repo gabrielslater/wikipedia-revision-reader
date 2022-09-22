@@ -12,7 +12,7 @@ void main() async {
 
   for (String query in queries) {
     var json = jsonDecode(await readJson(query));
-    revisions[query] = RevisionParser.parseRevisions(json);
+    revisions[query] = revisionParser.parseRevisions(json);
   }
 
   group('RevisionParser', () {
