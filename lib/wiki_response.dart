@@ -1,4 +1,4 @@
-import 'package:twp_payton_h_gabriel_s/revision_parser.dart';
+import 'package:twp_payton_h_gabriel_s/wiki_revision_parser.dart';
 
 class WikiResponse {
   final String title;

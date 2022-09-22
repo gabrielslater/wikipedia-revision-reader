@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:test/test.dart';
 import 'package:twp_payton_h_gabriel_s/read_json.dart';
-import 'package:twp_payton_h_gabriel_s/revision_parser.dart';
+import 'package:twp_payton_h_gabriel_s/wiki_revision_parser.dart';
 
 void main() async {
   final queries = ['c._elegans', 'pet_door', 'jack_brierley'];
