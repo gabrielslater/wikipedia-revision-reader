@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:test/test.dart';
-import 'package:twp_payton_h_gabriel_s/read_json.dart' show readJson;
+import 'package:twp_payton_h_gabriel_s/read_json.dart';
 import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
 void main() async {
