@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
+import 'package:twp_payton_h_gabriel_s/read_json.dart' show readJson;
 import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
 void main() async {
@@ -57,15 +56,4 @@ void main() async {
       responseIndex++;
     }
   });
-}
-
-/// Reads a JSON file from test files.
-/// [filename] does not include extension
-Future<String> readJson(String filename) async {
-  // written with assistance of
-  // https://docs.flutter.dev/cookbook/persistence/reading-writing-files
-  final file = File(p.join('test', 'data', '$filename.json'));
-  final contents = await file.readAsString();
-
-  return contents;
 }
