@@ -7,6 +7,7 @@ import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 void main() async {
   final queries = ['c._elegans', 'pet_door', 'jack_brierley'];
   var responses = {};
+  int responseIndex;
 
   for (String query in queries) {
     var json = jsonDecode(await readJson(query));
@@ -28,7 +29,7 @@ void main() async {
       ];
       var expectedRevisions = [30, 30, 12];
 
-      var responseIndex = 0;
+      responseIndex = 0;
 
       for (String response in responses.keys) {
         expect(responses[response].title, expectedTitles[responseIndex]);
@@ -49,7 +50,7 @@ void main() async {
         {}
       ];
 
-      var responseIndex = 0;
+      responseIndex = 0;
 
       for (String response in responses.keys) {
         expect(responses[response].redirect, expectedRedirects[responseIndex]);
