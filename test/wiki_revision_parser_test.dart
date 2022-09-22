@@ -20,4 +20,10 @@ void main() async {
       expect(revisionParser.runtimeType, RevisionParser);
     });
   });
+
+  test('parseRevisions returns a list of strings', () {
+    for (var revision in revisions.keys) {
+      expect(revisions[revision].runtimeType, List<String>);
+    }
+  });
 }
