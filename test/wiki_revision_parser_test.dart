@@ -8,7 +8,7 @@ void main() async {
   final queries = ['c._elegans', 'pet_door', 'jack_brierley'];
   var revisions = {};
 
-  final revisionParser = RevisionParser();
+  final revisionParser = WikiRevisionParser();
   int revisionIndex;
 
   group('RevisionParser', () async {
@@ -16,7 +16,7 @@ void main() async {
       var json = jsonDecode(await readJson(query));
       revisions[query] = revisionParser.parse(json);
       test('RevisionParser created from "$json"', () {
-        expect(revisionParser.runtimeType, RevisionParser);
+        expect(revisionParser.runtimeType, WikiRevisionParser);
       });
     }
 

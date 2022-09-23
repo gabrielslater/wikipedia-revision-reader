@@ -1,7 +1,7 @@
-class Revision {
+class WikiRevision {
   final String user;
 
-  Revision(this.user);
+  WikiRevision(this.user);
 
-  Revision.fromJson(Map<String, dynamic> json) : user = json['user'];
+  WikiRevision.fromJson(Map<String, dynamic> json) : user = json['user'];
 }

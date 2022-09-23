@@ -13,7 +13,7 @@ class WikiResponse {
     // TODO: this needs to be moved
     // surely this shouldn't be declared in here -- maybe in a parent class?
     // should parseRevisions() be part of a response? probably not.
-    final RevisionParser revisionParser = RevisionParser();
+    final WikiRevisionParser revisionParser = WikiRevisionParser();
 
     var revisions = revisionParser.parse(json);
     return WikiResponse(

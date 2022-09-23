@@ -28,9 +28,9 @@ void main() async {
 
   group('Revision', () {
     for (var revision = 0; revision < revisionJson.length; revision++) {
-      revisions.add(Revision.fromJson(revisionJson[revision]));
+      revisions.add(WikiRevision.fromJson(revisionJson[revision]));
       test('Revision created from "${revisionJson[revision]}"', () {
-        expect(revision.runtimeType, Revision);
+        expect(revision.runtimeType, WikiRevision);
       });
     }
 
