@@ -26,13 +26,10 @@ void main() async {
   //     - bool isAnon
   //     - DateTime timestamp
 
-  for (var revision in revisionJson) {
-    revisions.add(Revision.fromJson(revision));
-  }
-
   group('Revision', () {
-    for (var revision in revisions) {
-      test('Revision created from "$revision" successfully', () {
+    for (var revision = 0; revision < revisionJson.length; revision++) {
+      revisions.add(Revision.fromJson(revisionJson[revision]));
+      test('Revision created from "${revisionJson[revision]}"', () {
         expect(revision.runtimeType, Revision);
       });
     }
