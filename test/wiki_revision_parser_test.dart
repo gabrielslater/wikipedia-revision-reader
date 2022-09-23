@@ -7,15 +7,19 @@ import 'package:twp_payton_h_gabriel_s/wiki_revision_parser.dart';
 void main() async {
   final queries = ['c._elegans', 'pet_door', 'jack_brierley'];
   var revisions = {};
+  var revisionJson = {};
 
   final revisionParser = WikiRevisionParser();
   int revisionIndex;
 
-  group('RevisionParser', () async {
+  for (String query in queries) {
+    revisionJson[query] = jsonDecode(await readJson(query));
+  }
+
+  group('RevisionParser', () {
     for (String query in queries) {
-      var json = jsonDecode(await readJson(query));
-      revisions[query] = revisionParser.parse(json);
-      test('RevisionParser created from "$json"', () {
+      revisions[query] = revisionParser.parse(revisionJson[query]);
+      test('RevisionParser created from "${revisionJson[query]}"', () {
         expect(revisionParser.runtimeType, WikiRevisionParser);
       });
     }

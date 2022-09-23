@@ -7,13 +7,17 @@ import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 void main() async {
   final queries = ['c._elegans', 'pet_door', 'jack_brierley'];
   var responses = {};
+  var responseJson = {};
   int responseIndex;
 
-  group('WikiResponse', () async {
+  for (String query in queries) {
+    responseJson[query] = jsonDecode(await readJson(query));
+  }
+
+  group('WikiResponse', () {
     for (String query in queries) {
-      var json = jsonDecode(await readJson(query));
-      responses[query] = WikiResponse.fromJson(json);
-      test('WikiResponse created from "$json"', () {
+      responses[query] = WikiResponse.fromJson(responseJson[query]);
+      test('WikiResponse created from "{$responseJson[query]}"', () {
         for (String response in responses.keys) {
           expect(responses[response].runtimeType, WikiResponse);
         }
