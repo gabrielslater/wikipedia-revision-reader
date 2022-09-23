@@ -1,5 +1,3 @@
-import 'package:twp_payton_h_gabriel_s/wiki_revision_parser.dart';
-
 class WikiResponse {
   final String title;
   final List<String> revisions;
@@ -9,20 +7,16 @@ class WikiResponse {
 
   WikiResponse(this.title, this.revisions, this.redirect);
 
-  factory WikiResponse.fromJson(Map<String, dynamic> json) {
-    // TODO: this needs to be moved
-    // surely this shouldn't be declared in here -- maybe in a parent class?
-    // should parseRevisions() be part of a response? probably not.
-    final WikiRevisionParser revisionParser = WikiRevisionParser();
-
-    var revisions = revisionParser.parse(json);
-    return WikiResponse(
-        json['query']['pages'][0]['title'],
-        revisions,
+  WikiResponse.fromJson(Map<String, dynamic> json)
+      : title = json['query']['pages'][0]['title'],
+        // https://stackoverflow.com/questions/60105956/how-to-cast-dynamic-to-liststring#60106251
+        // Map each item in the "revisions" to a string for now.
+        revisions = (json['query']['pages'][0]['revisions'] as List)
+            .map((item) => item.toString())
+            .toList(),
         // If there is no redirect, return an empty map, otherwise return the
         // redirect map.
-        (json['query']['redirects'] != null)
+        redirect = (json['query']['redirects'] != null)
             ? json['query']['redirects'][0]
-            : {});
-  }
+            : {};
 }
