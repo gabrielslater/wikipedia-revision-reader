@@ -33,5 +33,26 @@ void main() async {
         expect(revision.runtimeType, Revision);
       });
     }
+
+    var expectedUsers = [
+      'Josve05a',
+      'JCW-CleanerBot',
+      'Jonsta247',
+      'Jonsta247',
+      'Rlink2',
+      '99.101.56.68',
+      '99.101.56.68',
+      '101.78.69.215',
+      'Qwerfjkl (bot)'
+    ];
+
+    for (var expectedUser = 0;
+        expectedUser < expectedUsers.length;
+        expectedUser++) {
+      var revision = revisions[expectedUser];
+      test('Revision has correct user', () {
+        expect(revision.user, expectedUsers[expectedUser]);
+      });
+    }
   });
 }
