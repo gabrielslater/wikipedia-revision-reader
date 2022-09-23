@@ -15,7 +15,7 @@ void main() async {
   }
 
   group('WikiResponse', () {
-    test('WikiResponse created', () {
+    test('WikiResponse created successfully', () {
       for (String response in responses.keys) {
         expect(responses[response].runtimeType, WikiResponse);
       }
