@@ -65,9 +65,9 @@ void main() async {
 
   int revisionIndex;
 
-  group('WikiResponse', () {
+  group('WikiResponse revisions', () {
     for (var response in responses.keys) {
-      test('revisions is a list of strings', () {
+      test('.revisions is a list of strings', () {
         expect(responses[response].revisions.runtimeType, List<String>);
       });
     }
@@ -75,7 +75,7 @@ void main() async {
     var expectedRevisions = [30, 30, 12];
 
     revisionIndex = 0;
-    test('revisions is a list with the correct number of revisions', () {
+    test('.revisions is a list with the correct number of revisions', () {
       for (var response in responses.keys) {
         expect(responses[response].revisions.length,
             expectedRevisions[revisionIndex]);
@@ -164,7 +164,7 @@ void main() async {
       ],
     ];
 
-    test('revisions has correctly split strings', () {
+    test('.revisions has correctly split strings', () {
       revisionIndex = 0;
 
       for (var response in responses.keys) {
