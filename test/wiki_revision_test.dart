@@ -30,7 +30,7 @@ void main() async {
     for (var revision = 0; revision < revisionJson.length; revision++) {
       revisions.add(WikiRevision.fromJson(revisionJson[revision]));
       test('Revision created from "${revisionJson[revision]}"', () {
-        expect(revision.runtimeType, WikiRevision);
+        expect(revisions[revision].runtimeType, WikiRevision);
       });
     }
 
