@@ -54,5 +54,28 @@ void main() async {
         expect(revision.user, expectedUsers[expectedUser]);
       });
     }
+
+    var expectedAnons = [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      false
+    ];
+
+    for (var expectedAnon = 0;
+        expectedAnon < expectedAnons.length;
+        expectedAnon++) {
+      var revision = revisions[expectedAnon];
+      test(
+          'Revision ${expectedAnons[expectedAnon] ? 'is' : 'is not'} anonymous',
+          () {
+        expect(revision.isAnon, expectedAnons[expectedAnon]);
+      });
+    }
   });
 }
