@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:test/test.dart';
 import 'package:twp_payton_h_gabriel_s/read_json.dart';
 import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
+import 'package:twp_payton_h_gabriel_s/wiki_revision.dart';
 
 void main() async {
   final queries = ['c._elegans', 'pet_door', 'jack_brierley'];
@@ -67,8 +68,8 @@ void main() async {
 
   group('WikiResponse revisions', () {
     for (var response in responses.keys) {
-      test('.revisions is a list of strings', () {
-        expect(responses[response].revisions.runtimeType, List<String>);
+      test('.revisions is a list of Revisions', () {
+        expect(responses[response].revisions.runtimeType, List<WikiRevision>);
       });
     }
 
