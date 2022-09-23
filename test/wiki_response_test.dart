@@ -9,17 +9,16 @@ void main() async {
   var responses = {};
   int responseIndex;
 
-  for (String query in queries) {
-    var json = jsonDecode(await readJson(query));
-    responses[query] = WikiResponse.fromJson(json);
-  }
-
-  group('WikiResponse', () {
-    test('WikiResponse created successfully', () {
-      for (String response in responses.keys) {
-        expect(responses[response].runtimeType, WikiResponse);
-      }
-    });
+  group('WikiResponse', () async {
+    for (String query in queries) {
+      var json = jsonDecode(await readJson(query));
+      responses[query] = WikiResponse.fromJson(json);
+      test('WikiResponse created from "$json"', () {
+        for (String response in responses.keys) {
+          expect(responses[response].runtimeType, WikiResponse);
+        }
+      });
+    }
 
     var expectedTitles = [
       'Caenorhabditis elegans',

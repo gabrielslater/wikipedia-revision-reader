@@ -11,15 +11,14 @@ void main() async {
   final revisionParser = RevisionParser();
   int revisionIndex;
 
-  for (String query in queries) {
-    var json = jsonDecode(await readJson(query));
-    revisions[query] = revisionParser.parse(json);
-  }
-
-  group('RevisionParser', () {
-    test('RevisionParser created successfully', () {
-      expect(revisionParser.runtimeType, RevisionParser);
-    });
+  group('RevisionParser', () async {
+    for (String query in queries) {
+      var json = jsonDecode(await readJson(query));
+      revisions[query] = revisionParser.parse(json);
+      test('RevisionParser created from "$json"', () {
+        expect(revisionParser.runtimeType, RevisionParser);
+      });
+    }
 
     for (var revision in revisions.keys) {
       test('parseRevisions returns a list of strings', () {
