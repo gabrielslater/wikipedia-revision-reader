@@ -1,3 +1,7 @@
 class Revision {
-  Revision.fromJson(Map<String, dynamic> json);
+  final String user;
+
+  Revision(this.user);
+
+  Revision.fromJson(Map<String, dynamic> json) : user = json['user'];
 }
