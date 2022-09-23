@@ -77,5 +77,28 @@ void main() async {
         expect(revision.isAnon, expectedAnons[expectedAnon]);
       });
     }
+
+    var expectedTimestamps = [
+      DateTime.parse('2022-09-16T18:44:51Z'),
+      DateTime.parse('2022-09-04T00:05:04Z'),
+      DateTime.parse('2022-08-30T09:49:23Z'),
+      DateTime.parse('2022-08-30T09:44:38Z'),
+      DateTime.parse('2022-08-17T12:26:04Z'),
+      DateTime.parse('2022-06-09T18:19:31Z'),
+      DateTime.parse('2022-05-23T11:38:51Z'),
+      DateTime.parse('2022-03-12T02:07:41Z'),
+      DateTime.parse('2022-02-05T12:08:05Z'),
+    ];
+
+    for (var expectedTimestamp = 0;
+        expectedTimestamp < expectedTimestamps.length;
+        expectedTimestamp++) {
+      var revision = revisions[expectedTimestamp];
+      test('Revision was made at ${expectedTimestamps[expectedTimestamp]}', () {
+        expect(
+            revision.timestamp.compareTo(expectedTimestamps[expectedTimestamp]),
+            0);
+      });
+    }
   });
 }
