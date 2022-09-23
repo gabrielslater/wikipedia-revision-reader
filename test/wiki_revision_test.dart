@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:test/test.dart';
+
 void main() async {
   // string of revisions to cut down on the test cases that need to be verified
-  String revisions = '{"revisions":['
+  String revisionStrings = '{"revisions":['
       '{"user":"Josve05a","timestamp":"2022-09-16T18:44:51Z"},'
       '{"user":"JCW-CleanerBot","timestamp":"2022-09-04T00:05:04Z"},'
       '{"user":"Jonsta247","timestamp":"2022-08-30T09:49:23Z"},'
@@ -14,11 +16,18 @@ void main() async {
       '{"user":"Qwerfjkl (bot)","timestamp":"2022-02-05T12:08:05Z"}'
       ']}';
 
-  var json = jsonDecode(revisions)[revisions];
+  var revisionJson = jsonDecode(revisionStrings)['revisions'];
+  var revisions = [];
 
   // Outline of Revision class
   // Revision
   //     - String user
   //     - bool isAnon
   //     - DateTime timestamp
+
+  for (var revision in revisionJson) {}
+
+  group('Revision', () {
+    test('Revision created successfully', () {});
+  });
 }
