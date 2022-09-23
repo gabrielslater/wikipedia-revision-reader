@@ -50,7 +50,7 @@ void main() async {
         expectedUser < expectedUsers.length;
         expectedUser++) {
       var revision = revisions[expectedUser];
-      test('Revision has correct user', () {
+      test('Revision created by ${expectedUsers[expectedUser]}', () {
         expect(revision.user, expectedUsers[expectedUser]);
       });
     }
