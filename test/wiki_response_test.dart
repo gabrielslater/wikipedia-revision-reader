@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:test/test.dart';
 import 'package:twp_payton_h_gabriel_s/read_json.dart';
 import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
@@ -12,7 +10,7 @@ void main() async {
   int responseIndex;
 
   for (String query in queries) {
-    responseJson[query] = jsonDecode(await readJson(query));
+    responseJson[query] = await readJson(query);
   }
 
   group('WikiResponse', () {
