@@ -16,7 +16,7 @@ class WikipediaRevisionReader extends StatelessWidget {
     return MaterialApp(
       title: 'Wikipedia Revision Reader',
       theme: ThemeData(
-          colorSchemeSeed: Colors.deepOrange,
+          colorSchemeSeed: const Color(0xFF94416f),
           textTheme: Theme.of(context).textTheme.apply(
               fontSizeFactor: 1.25,
               displayColor: Theme.of(context).colorScheme.onBackground)),
