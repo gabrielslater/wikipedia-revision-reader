@@ -1,12 +1,9 @@
 import 'package:test/test.dart';
-import 'package:twp_payton_h_gabriel_s/query_builder.dart';
+import 'package:twp_payton_h_gabriel_s/wiki_request.dart';
 
 void main() {
   // urls are created in the form of
   // https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=<NAME>&redirects=1&rvprop=timestamp%7Cuser&rvlimit=30
-
-  // TODO: should this just be a solitary function?
-  QueryBuilder builder = QueryBuilder();
 
   var queries = {
     'Soup':
@@ -17,10 +14,10 @@ void main() {
         'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=Joe Biden&redirects=1&rvprop=timestamp%7Cuser&rvlimit=30',
   };
 
-  group('QueryBuilder', () {
+  group('buildQuery', () {
     for (var query in queries.keys) {
       test('URL is formatted correctly', () {
-        var url = builder.build(query);
+        var url = WikiRequest().buildQuery(query);
         expect(url, queries[query]);
       });
     }
