@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:twp_payton_h_gabriel_s/wiki_requester.dart';
+import 'package:twp_payton_h_gabriel_s/wiki_request.dart';
 import 'package:twp_payton_h_gabriel_s/wiki_revision.dart';
 
 void main() {
@@ -36,7 +34,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final _controller = TextEditingController();
-  final _wikiRequester = WikiRequester();
+  final _wikiRequester = WikiRequest();
   final _snackBar = const SnackBar(content: Text('Fetching data...'));
 
   /// necessary to prevent empty space when the app opens
@@ -170,28 +168,29 @@ class _MainPageState extends State<MainPage> {
         _hasRequestedOnce = true;
       }
 
-      try {
-        setState(() {
-          _isProcessing = true;
-          ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-        });
+      setState(() {
+        _isProcessing = true;
+        ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+      });
 
-        var response = await _wikiRequester.fetchPage(query);
+      await _wikiRequester.fetchPage(query);
 
+      if (_wikiRequester.response != null && _wikiRequester.canConnect) {
         setState(() {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           _isProcessing = false;
           _isError = false;
-          _pageTitle = response.title;
-          _isRedirect = response.redirect.isNotEmpty;
+          _pageTitle = _wikiRequester.response!.title;
+          _isRedirect = _wikiRequester.response!.redirect.isNotEmpty;
 
           if (_isRedirect) {
-            _redirectText = 'Redirected from "${response.redirect['from']}"';
+            _redirectText =
+                'Redirected from "${_wikiRequester.response!.redirect['from']}"';
           }
 
-          _revisionsList = response.revisions;
+          _revisionsList = _wikiRequester.response!.revisions;
         });
-      } on SocketException {
+      } else if (!_wikiRequester.canConnect) {
         setState(() {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           _isProcessing = false;
@@ -201,7 +200,7 @@ class _MainPageState extends State<MainPage> {
           _revisionsList = [];
           _isRedirect = false;
         });
-      } catch (e) {
+      } else {
         setState(() {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();
           _isProcessing = false;
@@ -214,43 +213,42 @@ class _MainPageState extends State<MainPage> {
       }
     }
   }
+}
 
-  Container _buildRevisionItem(
-      ColorScheme colorScheme, bool isEven, WikiRevision revision) {
-    return Container(
-      color: (isEven ? colorScheme.surface : colorScheme.primaryContainer),
-      padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    revision.isAnon ? 'Anonymous' : revision.user,
-                    style: const TextStyle(fontSize: 25),
-                  ),
+Container _buildRevisionItem(
+    ColorScheme colorScheme, bool isEven, WikiRevision revision) {
+  return Container(
+    color: (isEven ? colorScheme.surface : colorScheme.primaryContainer),
+    padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+    child: Row(
+      children: <Widget>[
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  revision.isAnon ? 'Anonymous' : revision.user,
+                  style: const TextStyle(fontSize: 25),
                 ),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      child: (revision.isAnon
-                          ? Text(
-                              revision.user,
-                              style:
-                                  const TextStyle(fontStyle: FontStyle.italic),
-                            )
-                          : null),
-                    )),
-              ],
-            ),
+              ),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    child: (revision.isAnon
+                        ? Text(
+                            revision.user,
+                            style: const TextStyle(fontStyle: FontStyle.italic),
+                          )
+                        : null),
+                  )),
+            ],
           ),
-          const Spacer(),
-          Text(revision.timestamp.toString())
-        ],
-      ),
-    );
-  }
+        ),
+        const Spacer(),
+        Text(revision.timestamp.toString())
+      ],
+    ),
+  );
 }

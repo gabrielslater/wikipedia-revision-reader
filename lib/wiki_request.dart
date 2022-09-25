@@ -21,7 +21,13 @@ class WikiRequest {
       var json = jsonDecode(response);
 
       this.response = WikiResponse.fromJson(json);
-      isPage = this.response!.title != '';
+
+      if (this.response!.title != '') {
+        isPage = true;
+      } else {
+        this.response = null;
+        isPage = false;
+      }
     } on SocketException {
       isPage = false;
       canConnect = false;
