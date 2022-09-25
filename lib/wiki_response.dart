@@ -16,7 +16,6 @@ class WikiResponse {
     return WikiResponse(
         page['title'],
         // https://stackoverflow.com/questions/60105956/how-to-cast-dynamic-to-liststring#60106251
-        // Map each item in the "revisions" to a string for now.
         (page['revisions'] as List)
             .map((item) => WikiRevision.fromJson(item))
             .toList(),
