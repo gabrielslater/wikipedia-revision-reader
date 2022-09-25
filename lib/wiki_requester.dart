@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
-class WikiRequest {
+class WikiRequester {
   Future<WikiResponse> fetchPage(String query) async {
     var uri = Uri.parse(buildQuery(query));
     var response = await http.read(uri, headers: {
