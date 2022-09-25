@@ -9,16 +9,20 @@ class WikiResponse {
 
   WikiResponse(this.title, this.revisions, this.redirect);
 
-  WikiResponse.fromJson(Map<String, dynamic> json)
-      : title = json['query']['pages'][0]['title'],
+  factory WikiResponse.fromJson(Map<String, dynamic> json) {
+    var pageId = json['query']['pages'].keys.toList().first;
+    var page = json['query']['pages'][pageId];
+    return WikiResponse(
+        page['title'],
         // https://stackoverflow.com/questions/60105956/how-to-cast-dynamic-to-liststring#60106251
         // Map each item in the "revisions" to a string for now.
-        revisions = (json['query']['pages'][0]['revisions'] as List)
+        (page['revisions'] as List)
             .map((item) => WikiRevision.fromJson(item))
             .toList(),
         // If there is no redirect, return an empty map, otherwise return the
         // redirect map.
-        redirect = (json['query']['redirects'] != null)
+        (json['query']['redirects'] != null)
             ? json['query']['redirects'][0]
-            : {};
+            : {});
+  }
 }
