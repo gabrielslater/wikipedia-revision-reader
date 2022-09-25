@@ -5,13 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
 class WikiRequest {
-  late WikiResponse response;
+  WikiResponse? response;
   bool isPage = true;
   bool canConnect = true;
 
-  WikiRequest();
-
-  void fetchPage(String query) async {
+  Future<bool> fetchPage(String query) async {
     var uri = Uri.parse(buildQuery(query));
 
     try {
@@ -23,12 +21,13 @@ class WikiRequest {
       var json = jsonDecode(response);
 
       this.response = WikiResponse.fromJson(json);
-      isPage = this.response.title != '';
+      isPage = this.response!.title != '';
     } on SocketException {
-      response = WikiResponse('', [], {});
       isPage = false;
       canConnect = false;
     }
+
+    return true;
   }
 
   String buildQuery(String query) {
