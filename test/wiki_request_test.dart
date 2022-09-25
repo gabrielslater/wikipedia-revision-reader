@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:twp_payton_h_gabriel_s/wiki_requester.dart';
+import 'package:twp_payton_h_gabriel_s/wiki_request.dart';
 
 void main() {
   // urls are created in the form of
@@ -17,7 +17,7 @@ void main() {
   group('buildQuery', () {
     for (var query in queries.keys) {
       test('URL is formatted correctly', () {
-        var url = WikiRequester().buildQuery(query);
+        var url = WikiRequest().buildQuery(query);
         expect(url, queries[query]);
       });
     }
