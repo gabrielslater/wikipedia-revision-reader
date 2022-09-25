@@ -69,6 +69,23 @@ class _MainPageState extends State<MainPage> {
       ],
     );
 
+    var revisionList = Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(40),
+        child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(8),
+          itemCount: 30,
+          clipBehavior: Clip.hardEdge,
+          itemBuilder: (BuildContext context, int index) {
+            return _buildRevisionItem(
+                Theme.of(context).colorScheme, index % 2 == 0);
+          },
+        ),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -82,22 +99,7 @@ class _MainPageState extends State<MainPage> {
             children: <Widget>[
               pageTitle,
               searchForm,
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.all(40),
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(8),
-                    itemCount: 30,
-                    clipBehavior: Clip.hardEdge,
-                    itemBuilder: (BuildContext context, int index) {
-                      return _buildRevisionItem(
-                          Theme.of(context).colorScheme, index % 2 == 0);
-                    },
-                  ),
-                ),
-              )
+              revisionList,
             ],
           ),
         ),
