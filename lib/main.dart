@@ -37,6 +37,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   final _controller = TextEditingController();
   final _wikiRequester = WikiRequester();
+  final _snackBar = const SnackBar(content: Text('Fetching data...'));
 
   /// necessary to prevent empty space when the app opens
   bool _hasRequestedOnce = false;
@@ -166,11 +167,13 @@ class _MainPageState extends State<MainPage> {
       try {
         setState(() {
           _isProcessing = true;
+          ScaffoldMessenger.of(context).showSnackBar(_snackBar);
         });
 
         var response = await _wikiRequester.fetchPage(query);
 
         setState(() {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           _isProcessing = false;
           _isError = false;
           _pageTitle = response.title;
@@ -184,6 +187,7 @@ class _MainPageState extends State<MainPage> {
         });
       } on SocketException {
         setState(() {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           _isProcessing = false;
           _isError = true;
 
@@ -193,6 +197,7 @@ class _MainPageState extends State<MainPage> {
         });
       } catch (e) {
         setState(() {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
           _isProcessing = false;
           _isError = true;
 
