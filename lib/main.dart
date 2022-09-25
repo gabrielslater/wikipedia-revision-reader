@@ -112,9 +112,14 @@ class _MainPageState extends State<MainPage> {
       ],
     );
 
+    var revisionCount = Container(
+      child: (_revisionsList.isNotEmpty
+          ? Text('Found ${_revisionsList.length} revisions')
+          : null),
+    );
+
     var revisionList = Expanded(
       child: Container(
-        padding: const EdgeInsets.all(40),
         child: (_revisionsList.isNotEmpty
             ? ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -140,7 +145,7 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Center(
         child: Container(
-          padding: const EdgeInsets.fromLTRB(40, 10, 40, 0),
+          padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -148,6 +153,7 @@ class _MainPageState extends State<MainPage> {
               errorMessage,
               pageTitle,
               searchForm,
+              revisionCount,
               revisionList,
             ],
           ),
@@ -216,21 +222,30 @@ class _MainPageState extends State<MainPage> {
       padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
       child: Row(
         children: <Widget>[
-          Column(
-            children: <Widget>[
-              Text(
-                revision.isAnon ? 'Anonymous' : revision.user,
-                style: const TextStyle(fontSize: 25),
-              ),
-              Container(
-                child: (revision.isAnon
-                    ? Text(
-                        revision.user,
-                        style: const TextStyle(fontStyle: FontStyle.italic),
-                      )
-                    : null),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    revision.isAnon ? 'Anonymous' : revision.user,
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                ),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      child: (revision.isAnon
+                          ? Text(
+                              revision.user,
+                              style:
+                                  const TextStyle(fontStyle: FontStyle.italic),
+                            )
+                          : null),
+                    )),
+              ],
+            ),
           ),
           const Spacer(),
           Text(revision.timestamp.toString())
