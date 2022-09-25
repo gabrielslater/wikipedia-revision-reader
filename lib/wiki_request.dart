@@ -15,7 +15,7 @@ class WikiRequest {
     try {
       var response = await http.read(uri, headers: {
         'user-agent':
-            'Revision Reader/0.1.0 (https://github.com/bsu-cs222/twp-payton.h-gabriel.s; syslater@bsu.edu)'
+            'Revision Reader/0.1.1 (https://github.com/bsu-cs222/twp-payton.h-gabriel.s; syslater@bsu.edu)'
       });
 
       var json = jsonDecode(response);
