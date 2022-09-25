@@ -6,12 +6,14 @@ class WikiResponse {
 
   // what should an empty redirect be in the end?
   final Map<String, dynamic> redirect;
+  final bool isPage;
 
-  WikiResponse(this.title, this.revisions, this.redirect);
+  WikiResponse(this.title, this.revisions, this.redirect, this.isPage);
 
   factory WikiResponse.fromJson(Map<String, dynamic> json) {
     var pageId = json['query']['pages'].keys.toList().first;
     var page = json['query']['pages'][pageId];
+
     return WikiResponse(
         page['title'],
         // https://stackoverflow.com/questions/60105956/how-to-cast-dynamic-to-liststring#60106251
@@ -23,6 +25,7 @@ class WikiResponse {
         // redirect map.
         (json['query']['redirects'] != null)
             ? json['query']['redirects'][0]
-            : {});
+            : {},
+        page == '-1');
   }
 }
