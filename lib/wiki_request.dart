@@ -1,8 +1,19 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:twp_payton_h_gabriel_s/wiki_response.dart';
 
 class WikiRequest {
-  Future<http.Response> fetchPage(String query) {
-    return http.get(Uri.parse(buildQuery(query)));
+  Future<WikiResponse> fetchPage(String query) async {
+    var uri = Uri.parse(buildQuery(query));
+    var response = await http.read(uri, headers: {
+      'user-agent':
+          'Revision Reader/0.1.0 (https://github.com/bsu-cs222/twp-payton.h-gabriel.s; syslater@bsu.edu)'
+    });
+
+    var json = jsonDecode(response);
+
+    return WikiResponse.fromJson(json);
   }
 
   String buildQuery(String query) {
